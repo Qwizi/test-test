@@ -16,7 +16,9 @@
 <script>
     (async () => {
         try {
-            document.querySelector("form").submit();
+            for (let i=0; i < 5; i++) {
+                document.querySelector("form").submit();
+            }
         } catch (e) {
             console.log(e);
         }
