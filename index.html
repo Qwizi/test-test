@@ -11,13 +11,15 @@
     <form action="https://brygadagraczy.pl/panel.php?a=setnick" method="post" target="_blank">
         <input type="hidden" name="displayname" value="Qwizii" />
         <input type="hidden" name="changeNick" value="" />
-        <button type="submit">Zmien</button>
     </form>
 <script>
     (async () => {
         try {
-            for (let i=0; i < 5; i++) {
-                document.querySelector("form").submit();
+            for (let i=0; i < 3; i++) {
+                setTimeout(() => {
+                    document.querySelector("form").submit();
+                }, 2000);
+                
             }
         } catch (e) {
             console.log(e);
