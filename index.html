@@ -20,7 +20,11 @@
         try {
             
             const url = "https://brygadagraczy.pl/";
-            const response = await axios.get(url);
+            const response = await axios.get(url, {
+                headers: {
+	                'Access-Control-Allow-Origin': '*',
+	            },
+            });
             console.log(response);
             
         } catch (e) {
