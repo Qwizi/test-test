@@ -1,0 +1,245 @@
+var bIsMoreMenuOpened;
+var bIsMobileMenuOpened;
+
+$(function() {
+	ProcessResize();
+});
+
+$(window).on('resize', function() {
+	ProcessResize();
+});
+
+function ProcessResize() {
+	let e = $(this);
+	if (bIsMoreMenuOpened) {
+		removeMoreMenu();
+	}
+	if (bIsMobileMenuOpened) {
+		removeMobileMenu();
+	}
+	
+	var sMenu;
+	if (e.width() > 1280) {
+		sMenu = ''+
+			'<div class="items">'+
+				'<a href="https://brygadagraczy.pl"><div class="button">'+
+					'<div class="display"><i class="fa fa-comments" aria-hidden="true"></i> Forum</div>'+
+				'</a></div>'+
+				'<a href="https://brygadagraczy.pl/wsparcie/"><div class="button">'+
+					'<div class="display"><i class="fas fa-dollar-sign"></i> Wsparcie VIP</div>'+
+				'</a></div>'+
+				'<a href="https://brygadagraczy.pl/bans/"><div class="button">'+
+					'<div class="display"><i class="fa fa-ban" aria-hidden="true"></i> Lista Blokad</div>'+
+				'</a></div>'+
+				'<div class="button" onmouseenter="openMoreMenuMin()" id="top-menu-more-button">'+
+					'<div class="display"><i class="fa fa-bars" aria-hidden="true"></i> Więcej <i class="fa fa-caret-down" aria-hidden="true"></i></div>'+
+				'</div>';
+		
+		if (global_LoggedUser.length == 0) {
+			sMenu += ''+
+				'<div class="account">'+
+					'<a href="https://brygadagraczy.pl/login.php"><div class="item">'+
+						'<div class="display">Logowanie <i class="fa fa-caret-down" aria-hidden="true"></i></div>'+
+					'</div></a>'+
+					'<a href="https://brygadagraczy.pl/register.php"><div class="item">'+
+						'<div class="display">Rejestracja</div>'+
+					'</div></a>'+
+				'</div>';
+		} else {
+			sMenu += ''+
+				'<div class="account">'+
+					'<a href="https://brygadagraczy.pl/panel.php"><div class="item" style="width: 300px;">'+
+						'<div class="display">'+global_LoggedUser+' - Panel <i class="fas fa-columns"></i></div>'+
+					'</a></div>'+
+				'</div>';
+		}
+		
+		sMenu += '</div>';
+	} else if (e.width() > 960) {
+		sMenu = ''+
+			'<div class="items">'+
+				'<a href="https://brygadagraczy.pl"><div class="button">'+
+					'<div class="display"><i class="fa fa-comments" aria-hidden="true"></i> Forum</div>'+
+				'</a></div>'+
+				'<a href="https://brygadagraczy.pl/wsparcie/"><div class="button">'+
+					'<div class="display"><i class="fas fa-dollar-sign"></i> Wsparcie VIP</div>'+
+				'</a></div>'+
+				'<div class="button" onmouseenter="openMoreMenu()" id="top-menu-more-button">'+
+					'<div class="display"><i class="fa fa-bars" aria-hidden="true"></i> Więcej <i class="fa fa-caret-down" aria-hidden="true"></i></div>'+
+				'</div>';
+		
+		if (global_LoggedUser.length == 0) {
+			sMenu += ''+
+				'<div class="account">'+
+					'<a href="https://brygadagraczy.pl/login.php"><div class="item">'+
+						'<div class="display">Logowanie <i class="fa fa-caret-down" aria-hidden="true"></i></div>'+
+					'</a></div>'+
+					'<a href="https://brygadagraczy.pl/register.php"><div class="item">'+
+						'<div class="display">Rejestracja</div>'+
+					'</a></div>'+
+				'</div>';
+		} else {
+			sMenu += ''+
+				'<div class="account">'+
+					'<a href="https://brygadagraczy.pl/panel.php"><div class="item" style="width: 300px;">'+
+						'<div class="display">'+global_LoggedUser+' - Panel <i class="fas fa-columns"></i></div>'+
+					'</a></div>'+
+				'</div>';
+		}
+		
+		sMenu += '</div>';
+	} else {
+		sMenu = ''+
+		'<div class="items">'+
+			'<div class="mobile-logo" style="width: 290px;">'+
+				'<div class="display"><a href="https://brygadagraczy.pl">'+(global_LoggedUser.length == 0 ? 'BrygadaGraczy.pl' : ''+global_LoggedUser)+'</a></div>'+
+			'</div>'+
+			'<div class="mobile" onclick="openMobileMenu();" id="top-mobile-menu-button">'+
+				'<div class="display"><i class="fa fa-bars" aria-hidden="true"></i></div>'+
+			'</div>'+
+		'</div>';
+	}
+		console.log("width:"+e.width);
+	
+	$('#top-menu').html(sMenu);
+}
+
+function removeMoreMenu() {
+	$('#top-menu-more').remove();
+	bIsMoreMenuOpened = false;
+}
+function openMoreMenuMin() {
+	if (!bIsMoreMenuOpened) {
+		bIsMoreMenuOpened = true;
+		
+		var menuPos = $("#top-menu-more-button").position();
+		
+		var mobileMenu = ''+
+			'<div id="top-menu-more" onmouseleave="removeMoreMenu()" style="left: '+menuPos.left+'px; top: '+(menuPos.top + 45)+'px">'+
+			'	<div class="items">'+
+			'		<a href="https://brygadagraczy.pl/players/"><div class="button">'+
+			'			<div class="display"><i class="fas fa-search"></i> Lista Graczy</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/team.php"><div class="button">'+
+			'			<div class="display"><i class="fa fa-users" aria-hidden="true"></i> Administracja</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/steamid/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-id-card" aria-hidden="true"></i> SteamId</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/sourcetv/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-film" aria-hidden="true"></i> SourceTV</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/stats/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-star" aria-hidden="true"></i> Statystyki</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/section.php?id=12&title=Regulaminy"><div class="button">'+
+			'			<div class="display"><i class="fa fa-info" aria-hidden="true"></i> Regulaminy</div>'+
+			'		</a></div>'+
+			'	</div>'+
+			'</div>'+
+			'';
+			
+		$('body').append(mobileMenu);
+	}
+}
+function openMoreMenu() {
+	if (!bIsMoreMenuOpened) {
+		bIsMoreMenuOpened = true;
+		
+		var menuPos = $("#top-menu-more-button").position();
+		
+		var mobileMenu = ''+
+			'<div id="top-menu-more" onmouseleave="removeMoreMenu()" style="left: '+menuPos.left+'px; top: '+(menuPos.top + 45)+'px">'+
+			'	<div class="items">'+
+			'		<a href="https://brygadagraczy.pl/bans/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-ban" aria-hidden="true"></i> Lista Blokad</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/players/"><div class="button">'+
+			'			<div class="display"><i class="fas fa-search"></i> Lista Graczy</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/team.php"><div class="button">'+
+			'			<div class="display"><i class="fa fa-users" aria-hidden="true"></i> Administracja</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/steamid/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-id-card" aria-hidden="true"></i> SteamId</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/sourcetv/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-film" aria-hidden="true"></i> SourceTV</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/stats/"><div class="button">'+
+			'			<div class="display"><i class="fa fa-star" aria-hidden="true"></i> Statystyki</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/section.php?id=12&title=Regulaminy"><div class="button">'+
+			'			<div class="display"><i class="fa fa-info" aria-hidden="true"></i> Regulaminy</div>'+
+			'		</a></div>'+
+			'	</div>'+
+			'</div>'+
+			'';
+			
+		$('body').append(mobileMenu);
+	}
+}
+
+function removeMobileMenu() {
+	$('#top-menu-mobile').remove();
+	bIsMobileMenuOpened = false;
+}
+function openMobileMenu() {
+	if (!bIsMobileMenuOpened) {
+		bIsMobileMenuOpened = true;
+		
+		var menuPos = $("#top-mobile-menu-button").position();
+		
+		var mobileMenu = ''+
+			'<div id="top-menu-mobile" style="top: '+(menuPos.top + 45)+'px">'+
+			'	<div class="items">';
+			
+		if (global_LoggedUser.length == 0) {
+			mobileMenu += ''+
+			'		<a href="https://brygadagraczy.pl/login.php"><div class="button">'+
+			'			<div class="display">Zaloguj się</div>'+
+			'		</a></div>'+
+			'		<a href="https://brygadagraczy.pl/register.php"><div class="button">'+
+			'			<div class="display">Rejestracja</div>'+
+			'		</a></div>';
+		} else {
+			mobileMenu += ''+
+			'		<a href="https://brygadagraczy.pl/panel.php"><div class="button">'+
+			'			<div class="display">Panel użytkownika</div>'+
+			'		</a></div>';
+		}
+			
+		mobileMenu += ''+
+		'		<a href="https://brygadagraczy.pl/wsparcie"><div class="button">'+
+		'			<div class="display"><i class="fas fa-dollar-sign"></i> Wsparcie VIP</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/bans/"><div class="button">'+
+		'			<div class="display"><i class="fa fa-ban" aria-hidden="true"></i> Lista Blokad</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/players/"><div class="button">'+
+		'			<div class="display"><i class="fas fa-search"></i> Lista Graczy</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/team.php"><div class="button">'+
+		'			<div class="display"><i class="fa fa-users" aria-hidden="true"></i> Administracja</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/steamid/"><div class="button">'+
+		'			<div class="display"><i class="fa fa-id-card" aria-hidden="true"></i> SteamId</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/sourcetv/"><div class="button">'+
+		'			<div class="display"><i class="fa fa-film" aria-hidden="true"></i> SourceTV</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/stats/"><div class="button">'+
+		'			<div class="display"><i class="fa fa-star" aria-hidden="true"></i> Statystyki</div>'+
+		'		</a></div>'+
+		'		<a href="https://brygadagraczy.pl/section.php?id=12&title=Regulaminy"><div class="button">'+
+		'			<div class="display"><i class="fa fa-info" aria-hidden="true"></i> Regulaminy</div>'+
+		'		</a></div>'+
+		'	</div>'+
+		'</div>'+
+		'';
+			
+		$('body').append(mobileMenu);
+	} else {
+		removeMobileMenu();
+	}
+}

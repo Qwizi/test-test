@@ -1,0 +1,25 @@
+$(function() {
+	$("#login").focusout(function() {
+		var login = $("#login").val();
+		if (login.length > 18 || login.length < 3) {
+			var regex = /[^0-9a-zA-Z_-]+/;
+			if (regex.test(login)) {
+				$("#validLogin").css("color", '#ff0000');
+			} else {
+				$("#validLogin").css("color", '#ff0000');
+			}
+		} else {
+			$("#validLogin").css("color", '#00ff00');
+		}
+	});
+	
+	$("#password").focusout(function() {
+		var password = $("#password").val();
+		if (password.length > 32 || password.length < 8) {
+			$("#validPassword").css("color", '#ff0000');
+		} else {
+			$("#validPassword").css("color", '#00ff00');
+		}
+	});
+	
+});

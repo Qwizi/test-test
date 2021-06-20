@@ -1,0 +1,40 @@
+var global_LoggedUser = "";
+
+function redirect(url) {
+	window.location.href = url;
+}
+
+function vCallOnResizeWebsite() {
+	let iWidth = $(document).width();
+	let iHeight = $(document).height();
+	
+	var eResizeWebsite = $.Event('OnResizeWebsite');
+	eResizeWebsite.width = iWidth;
+	eResizeWebsite.height = iHeight;
+	$(window).trigger(eResizeWebsite);
+}
+
+var mm1224 = window.matchMedia("(max-width: 1280px)");
+mm1224.addListener(function(mm1224) { vCallOnResizeWebsite() });
+
+var mm960 = window.matchMedia("(max-width: 960px)");
+mm960.addListener(function(mm960) { vCallOnResizeWebsite() });
+
+var mm640 = window.matchMedia("(max-width: 640px)");
+mm640.addListener(function(mm640) { vCallOnResizeWebsite() });
+
+$(function() {
+	vCallOnResizeWebsite();
+	checkCookieInfo();
+});
+
+function acceptCookie() {
+	document.body.removeChild(document.getElementById("cookie-info"));
+	localStorage.setItem('cookieinfo', 'true');
+}
+
+function checkCookieInfo() {
+	if (localStorage.getItem("cookieinfo") != 'true') {
+		document.body.innerHTML += '<div id="cookie-info" style="width: 100%;min-height: 50px;position: fixed;bottom: 0;background-color: rgba(44, 33, 32, 0.85);border-top: 1px solid #403838;"><div id="cookie-info-text" style="margin: auto;margin-top: 16px;padding-bottom:16px;text-align: center;width: 90%;color: #fff;font-size: 16px;">Nasza strona korzysta z plików <b>cookies</b> i <b>localStorage</b> w celu reklamowaych, funkcjonalności, statystyk. Dzięki nim ułatwiamy korzystanie ze strony. W każdej chwili możesz je usunąć lub wyłączyć w ustawieniach przeglądarki. <a href="https://pl.wikipedia.org/wiki/HTTP_cookie">Więcej o cookies</a>.. Pozostając niej wyrażasz zgodę na ich wykorzystywanie. <span id="cookie-info-accept" style="color: #00ff00;cursor: pointer;" onclick="acceptCookie()"><b>Rozumiem</b></span>.</div></div>';
+	}
+}

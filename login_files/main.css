@@ -1,0 +1,81 @@
+body {
+	margin: 0;
+	
+	background-image: url('../img/bg3.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #2b211f;
+	
+	font-family: Roboto, Arial;
+	font-size: 16px;
+	color: #dadada;
+}
+
+:root {
+	--color-tab: rgba(47, 30, 16, 0.65);
+	--color-tab-clear: rgba(47, 30, 16, 0.9);
+	--color-border: #403434;
+	--color-box: rgba(48, 30, 21, 0.5);
+	
+	--color-thread-box: rgba(48, 30, 21, 0.9);
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/Roboto-Regular.ttf");
+}
+
+a {
+	text-decoration: none;
+	color: #dadada;
+}
+
+#container {
+	margin: auto;
+	margin-top: 40px;
+	width: 1280px;
+	color: #dadada;
+	display: table;
+	padding-bottom: 50px;
+}
+
+#right-bar {
+	float: right;
+	width: 23%;
+	min-height: 35px;
+	position: relative;
+}
+
+@media screen and (max-width: 1280px) {
+	#container {
+		width: 900px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	#container {
+		width: 90%;
+	}
+	#right-bar {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: #1f1f1f; 
+}
+::-webkit-scrollbar-thumb {
+	background: #5f5f5f; 
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #999898; 
+}

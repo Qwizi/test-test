@@ -1,0 +1,3 @@
+function POPUPInfoClose(id) {
+	$("#pi-"+id).remove();
+}
